@@ -9,8 +9,6 @@ _author = "xzyStudio"
 _cost = 0.00
 
 class memes(PBF):
-    def __enter__(self):
-        return [
     @RegCmd(
         name = "添加快捷表情 ",
         usage = "添加快捷表情 <触发关键词> <图片>",
@@ -25,7 +23,8 @@ class memes(PBF):
         permission = "anyone",
         function = "memes@messageListener",
         description = "MessageListener",
-        mode = "表情增强"
+        mode = "表情增强",
+        type = "message"
     )
     @RegCmd(
         name = "删除快捷表情 ",
@@ -35,15 +34,7 @@ class memes(PBF):
         description = "删除快捷表情",
         mode = "表情增强"
     )
-    @RegCmd(
-        name = "快捷表情列表",
-        usage = "快捷表情列表",
-        permission = "anyone",
-        function = "memes@listMemes",
-        description = "列出您的快捷表情",
-        mode = "表情增强"
-    )
-        ]
+    
     
     def add(self):
         if '\r\n' in self.data.args[2]:
@@ -59,6 +50,13 @@ class memes(PBF):
                 self.client.CallApi('delete_msg', {'message_id':self.data.se.get('message_id')})
                 return 
     
+    @RegCmd(
+        name = "快捷表情列表",
+        usage = "快捷表情列表",
+        permission = "anyone",
+        description = "列出您的快捷表情",
+        mode = "表情增强"
+    )
     def listMemes(self):
         arr = []
         memesList = self.mysql.selectx("SELECT * FROM `botMemes` WHERE `uid`=%s", (self.data.se.get("user_id")))
