@@ -26,7 +26,7 @@ class memes(PBF):
         self.client.msg().raw("face54已添加！")
 
     @RegCmd(
-        name="MessageListener",
+        name="MemesMessageListener",
         usage="MessageListener",
         permission="anyone",
         description="MessageListener",
@@ -65,5 +65,5 @@ class memes(PBF):
         mode="表情增强"
     )
     def rmMemes(self):
-        MemesModel()._delete(keyword=self.data.args[1], uid=self.data.se.get("user_id"))
+        MemesModel()._delete(keyword=self.data.message, uid=self.data.se.get("user_id"))
         self.client.msg().raw("face54已删除！")
