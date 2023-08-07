@@ -38,7 +38,7 @@ class memes(PBF):
         for i in memesList:
             if self.regex.pair(i.get("keyword"), self.data.message):
                 self.client.msg().raw(i.get("url"))
-                self.client.CallApi('delete_msg', {'message_id': self.data.se.get('message_id')})
+                # self.client.CallApi('delete_msg', {'message_id': self.data.se.get('message_id')})
                 return
 
     @RegCmd(
